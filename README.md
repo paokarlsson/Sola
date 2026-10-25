@@ -16,7 +16,7 @@ Ramverket uppfinns inte, det **extraheras**: en riktig liten app byggs i ren HTM
 
 ## Principer
 
-- **Noll beroenden** – både i runtime och i verktygen. Node 22 eller senare är det enda som krävs.
+- **Noll beroenden** – både i runtime och i verktygen. Node 24 eller senare är det enda som krävs.
 - **Inget byggsteg** – native ES-moduler, import maps och dynamisk `import()` i stället för bundler.
 - **Ett API per sak** – parallella vägar splittrar ekosystemet.
 - **Läsbart på en kväll** – hela runtime i en fil.

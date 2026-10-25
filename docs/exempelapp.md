@@ -15,44 +15,49 @@ Domänen hålls generell: en utförare kan vara en frisör, en fysioterapeut ell
 
 ## Vyer
 
+Namn i kod, routes och API är på engelska. Det bindande domänkontraktet finns i arkitekturryggraden ([AD-13](../_bmad-output/initiative-sola/architecture-sola/architecture-sola.md#domänkontrakt)); den gäller om något här skiljer sig.
+
 | Route | Roll | Innehåll |
 |---|---|---|
 | `/` | Alla | Startsida med utförare och tjänster |
-| `/login` | Alla | Inloggning |
-| `/utforare/:id` | Alla | En utförares tjänster och lediga tider |
-| `/boka/:tidId` | Brukare | Bekräfta bokning, lägg till meddelande |
-| `/mina-bokningar` | Brukare | Kommande och tidigare bokningar, avboka |
-| `/schema` | Utförare | Veckoschema med tider och bokningar |
-| `/tider` | Utförare | Lägg ut och ta bort tider |
-| `/bokningar/:id` | Utförare | En bokning – bekräfta eller avvisa |
+| `/login?next=` | Alla | Inloggning |
+| `/providers/:id` | Alla | En utförares tjänster och lediga tider |
+| `/book/:slotId` | Brukare | Bekräfta bokning, lägg till meddelande |
+| `/my-bookings` | Brukare | Kommande och tidigare bokningar, avboka |
+| `/schedule` | Utförare | Veckoschema med tider och bokningar |
+| `/slots` | Utförare | Lägg ut och ta bort tider |
+| `/bookings/:id` | Utförare | En bokning – bekräfta eller avvisa |
 
 Utförarens vyer laddas bara för den som är inloggad som utförare.
 
 ## Datamodell
 
 ```
-Användare  { id, namn, roll: 'brukare' | 'utforare' }
-Tjänst     { id, utforareId, namn, minuter }
-Tid        { id, utforareId, start, slut, ledig }
-Bokning    { id, tidId, tjanstId, brukareId, status: 'väntar' | 'bekräftad' | 'avvisad' | 'avbokad', meddelande }
+User     { id, name, role: 'customer' | 'provider' }
+Service  { id, providerId, name, durationMinutes }
+Slot     { id, providerId, startsAt, endsAt, available }
+Booking  { id, slotId, serviceId, customerId, status: 'pending' | 'confirmed' | 'rejected' | 'cancelled', message }
 ```
+
+`customer` är brukare och `provider` är utförare. En tid har högst en aktiv bokning; en avbokad eller avvisad tid kan bokas igen.
 
 ## API
 
-JSON över REST. Sessionen ligger i en HttpOnly-cookie som servern sätter.
+JSON över REST. Sessionen ligger i en HttpOnly-cookie som servern sätter. Fel skickas som RFC 9457 Problem Details och tider i UTC.
 
 | Metod och sökväg | Roll | Gör |
 |---|---|---|
 | `POST /api/login`, `POST /api/logout` | Alla | Logga in och ut |
 | `GET /api/me` | Inloggad | Aktuell användare |
-| `GET /api/utforare`, `GET /api/utforare/:id` | Alla | Utförare och deras tjänster |
-| `GET /api/utforare/:id/tider?fran&till` | Alla | Lediga tider |
-| `GET /api/bokningar` | Inloggad | Egna bokningar (brukare) eller bokningar hos mig (utförare) |
-| `POST /api/bokningar` | Brukare | Boka en tid |
-| `DELETE /api/bokningar/:id` | Brukare | Avboka |
-| `PATCH /api/bokningar/:id` | Utförare | Bekräfta eller avvisa |
-| `POST /api/tider`, `DELETE /api/tider/:id` | Utförare | Lägg ut och ta bort tider |
-| `GET /api/handelser` | Inloggad | Server-Sent Events när en bokning ändras |
+| `GET /api/providers`, `GET /api/providers/:id` | Alla | Utförare och deras tjänster |
+| `GET /api/providers/:id/slots?from&to` | Alla | Lediga tider |
+| `GET /api/slots?from&to` | Utförare | Alla egna tider, även bokade |
+| `POST /api/slots`, `DELETE /api/slots/:id` | Utförare | Lägg ut och ta bort tider |
+| `GET /api/bookings`, `GET /api/bookings/:id` | Inloggad | Egna bokningar (brukare) eller bokningar hos mig (utförare) |
+| `POST /api/bookings` | Brukare | Boka en tid |
+| `DELETE /api/bookings/:id` | Brukare | Avboka (bokningen behålls som `cancelled`) |
+| `PATCH /api/bookings/:id` | Utförare | Bekräfta eller avvisa |
+| `GET /api/events` | Inloggad | Server-Sent Events när en bokning eller tid ändras |
 
 Under utvecklingen är servern en liten Node-server med data i minnet. Senare tar Spola över.
 
@@ -76,9 +81,9 @@ Appen ger konkreta exempel på [user stories](user-stories.md) 6–10 (statiska 
 ## Byggordning
 
 Varje steg byggs i ren HTML/JS/CSS. När samma lösning skrivs för andra gången flyttas den in i Sola.
-
+1. **Grund:** `example/web/` med `index.html`, `app.js` och `style.css`, `sola dev` för filservering och live reload, och `example/server/` med API och data i minnet.
 1. **Grund:** `index.html`, `app.js`, `style.css` och en devserver med API och data i minnet.
-2. **Utförare och tider:** startsidan och `/utforare/:id` – första listorna och första routingen.
+2. **Utförare och tider:** startsidan och `/providers/:id` – första listorna och första routingen.
 3. **Inloggning:** `/login`, sessionscookie och guards.
 4. **Brukarens flöde:** boka, mina bokningar, avboka – formulär och asynkront state.
 5. **Utförarens flöde:** schema, tider, bekräfta – laddas vid behov.

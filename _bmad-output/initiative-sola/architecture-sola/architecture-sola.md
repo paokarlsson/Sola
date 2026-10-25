@@ -5,7 +5,7 @@ purpose: build-substrate
 altitude: initiative
 paradigm: 'Extraherat ramverk: app och ramverk som separata enheter med enkelriktat beroende via import map'
 scope: 'Ramverket Sola, dess Node-verktyg och exempelappen (bokningssystem) som ramverket bryts ut ur'
-status: draft
+status: final
 created: '2026-10-25'
 updated: '2026-10-25'
 binds: [sola, tools, example]

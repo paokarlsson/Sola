@@ -17,7 +17,7 @@ Spola är en Spring-ersättare i Java med noll beroenden. Sola är samma idé f�
 Ett lika heltäckande ramverk som Angular, React och Vue – men med:
 
 - **Noll beroenden i runtime.**
-- **Noll beroenden i utvecklingsverktygen.** Node (22 eller senare) är det enda tillåtna.
+- **Noll beroenden i utvecklingsverktygen.** Node (24 eller senare) är det enda tillåtna.
 - **Inget byggsteg.** Det som körs i webbläsaren är exakt det du skrev.
 
 ## Huvudidé
