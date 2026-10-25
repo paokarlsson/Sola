@@ -18,3 +18,11 @@ Session: session_01HHFkveDN5ahRmaiePiCEQY · Timestamp: 2026-10-25T19:10:00+00:0
 - Action: Användaren satte en ram för hela genomgången.
 - Result: Beslut: skippa hinder, risker och problem; varje block presenteras enbart som möjligheter. Gäller alla senare block.
 - Open: Block 1 inte markerat klart.
+
+## 3 — Block 1 Syfte — redigering
+
+Session: session_01HHFkveDN5ahRmaiePiCEQY · Timestamp: 2026-10-25T19:15:00+00:00
+
+- Action: Användaren bad om ändrad målgrupp i syftet.
+- Result: Offentlig sektor/reglerade branscher borttaget ur block 1; målgruppen är nu "system som vill hålla nere förvaltningen". Gäller även kommande block (t.ex. block 5). docs/design.md ej ändrad.
+- Open: Ska design.md och README följa samma formulering?

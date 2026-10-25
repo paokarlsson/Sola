@@ -8,14 +8,14 @@ Ram (användarens): bara möjligheter, inga hinder eller problem.
 
 ## [ ] 1. Syfte — pågår (omskrivet som möjligheter)
 
-Sola ska vara ett frontendramverk lika heltäckande som Angular, React och Vue, men med noll beroenden i runtime och verktyg och utan byggsteg. Det är tänkt som det naturliga nästa steget från tre filer (`index.html`, `app.js`, `style.css`), så att en app kan växa utan omskrivning eller bundler. Tillsammans med Spola (Java, noll beroenden) ska det bli en fullstack helt utan beroenden, riktad särskilt mot offentlig sektor och reglerade branscher där granskningsbarhet och långsiktig förvaltning väger tungt.
+Sola ska vara ett frontendramverk lika heltäckande som Angular, React och Vue, men med noll beroenden i runtime och verktyg och utan byggsteg. Det är tänkt som det naturliga nästa steget från tre filer (`index.html`, `app.js`, `style.css`), så att en app kan växa utan omskrivning eller bundler. Tillsammans med Spola (Java, noll beroenden) ska det bli en fullstack helt utan beroenden, riktad mot system som vill hålla nere förvaltningen.
 
 **Möjligheterna i syftet:**
 
 - **Webben som den är, fast hela vägen.** Alla som kan HTML, CSS och JavaScript kan redan Sola. Tröskeln in är i princip noll.
 - **Appar som håller i tio år.** Inget byggsteg och inga beroenden betyder att en app från 2026 fortfarande startar 2036 – utan uppgraderingsprojekt.
 - **Hela stacken går att granska.** Sola plus Spola blir en fullstack där varje rad som körs går att läsa, signera och arkivera. Det är unikt.
-- **Ett eget segment.** Offentlig sektor, vård, finans och försvar har krav som de stora ramverken inte är byggda för. Sola kan bli förstahandsvalet där.
+- **Låg förvaltningskostnad.** För system som ska leva länge med liten budget för underhåll – inga beroendeuppdateringar, inga säkerhetspatchar i tredjepartskod, inga migreringar mellan ramverksversioner. Sola kan bli förstahandsvalet för dem.
 - **Perfekt för AI-skriven kod.** En liten, stabil, läsbar API-yta är lätt för AI-agenter att använda rätt – och lätt för människor att granska efteråt.
 
 *Källa: sammanfattat från [docs/design.md](../../docs/design.md) (avsnitten Mål, Huvudidé, Positionering). Det finns ingen ticket eller spec.*
