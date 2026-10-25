@@ -26,3 +26,12 @@ Session: session_01HHFkveDN5ahRmaiePiCEQY · Timestamp: 2026-10-25T19:15:00+00:0
 - Action: Användaren bad om ändrad målgrupp i syftet.
 - Result: Offentlig sektor/reglerade branscher borttaget ur block 1; målgruppen är nu "system som vill hålla nere förvaltningen". Gäller även kommande block (t.ex. block 5). docs/design.md ej ändrad.
 - Open: Ska design.md och README följa samma formulering?
+
+## 4 — Block 1 Syfte — dokument uppdaterade, user stories
+
+Session: session_01HHFkveDN5ahRmaiePiCEQY · Timestamp: 2026-10-25T19:20:00+00:00
+
+- Action: Ändrade målgrupp i docs/design.md:180 och lade till en mening om målgruppen i README.md:5. Tog fram 12 user stories ur möjligheterna.
+- Result: Block 1 klart. Offentlig sektor borttaget ur design.md. User stories i utkast.
+- Evidence: docs/design.md:180, README.md:5, _bmad-output/walkthrough-sola-vision/user-stories.md
+- Open: User stories ej godkända av användaren.

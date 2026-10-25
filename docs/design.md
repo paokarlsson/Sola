@@ -177,7 +177,7 @@ import { signal, html, mount } from '#sola';
 - **Säkerhet i leveranskedjan:** inga npm-beroenden att granska.
 - **Ramverket som inte behöver uppgraderas:** löfte om inga brytande ändringar under lång tid.
 - **Läsbart på en kväll:** hela runtime i en fil.
-- **Offentlig sektor och reglerade branscher:** WCAG/DOS-lagen, granskningsbarhet och långsiktig förvaltning – tillsammans med Spola en fullstack helt utan beroenden.
+- **System som vill hålla nere förvaltningen:** inga beroenden att uppdatera, inga säkerhetspatchar i tredjepartskod, inga migreringar mellan ramverksversioner – tillsammans med Spola en fullstack helt utan beroenden.
 
 ## Idéer att utforska
 

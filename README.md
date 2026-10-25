@@ -2,7 +2,7 @@
 
 **Ett webbramverk utan beroenden.**
 
-Sola är ett frontendramverk med samma ambition som Angular, React och Vue – men med noll beroenden i runtime, noll beroenden i utvecklingsverktygen och inget byggsteg. Det som körs i webbläsaren är exakt det du skrev.
+Sola är ett frontendramverk med samma ambition som Angular, React och Vue – men med noll beroenden i runtime, noll beroenden i utvecklingsverktygen och inget byggsteg. Det som körs i webbläsaren är exakt det du skrev. Sola är byggt för system som vill hålla nere förvaltningen: inga beroenden att uppdatera och inga migreringar mellan ramverksversioner.
 
 Namnet kommer från **Solid + Ola**, på samma sätt som syskonprojektet [Spola](https://github.com/paokarlsson) (Spring + Ola) är en Spring-ersättare i Java utan beroenden. Tillsammans ska de bli en fullstack helt utan beroenden.
 

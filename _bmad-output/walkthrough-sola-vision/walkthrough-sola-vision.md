@@ -2,11 +2,11 @@
 
 Mål för genomgången: granska Solas vision i [docs/design.md](../../docs/design.md) och [README.md](../../README.md), och ta fram user stories som Sola löser.
 
-Aktuellt block: **1. Syfte**
+Aktuellt block: **User stories** (utkast i [user-stories.md](user-stories.md)), därefter 2. Översikt
 
 Ram (användarens): bara möjligheter, inga hinder eller problem.
 
-## [ ] 1. Syfte — pågår (omskrivet som möjligheter)
+## [x] 1. Syfte — klar (omskrivet som möjligheter, målgrupp ändrad)
 
 Sola ska vara ett frontendramverk lika heltäckande som Angular, React och Vue, men med noll beroenden i runtime och verktyg och utan byggsteg. Det är tänkt som det naturliga nästa steget från tre filer (`index.html`, `app.js`, `style.css`), så att en app kan växa utan omskrivning eller bundler. Tillsammans med Spola (Java, noll beroenden) ska det bli en fullstack helt utan beroenden, riktad mot system som vill hålla nere förvaltningen.
 
