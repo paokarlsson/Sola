@@ -78,3 +78,4 @@ Ett enda CLI byggt enbart på Node: `sola dev`, `sola test`, `sola build` och `s
 ## Läs mer
 
 - [docs/design.md](docs/design.md) – sammanfattning av designsamtalen: lärdomar från andra ramverk, teknisk kärna, verktyg, distribution och positionering.
+- [docs/user-stories.md](docs/user-stories.md) – user stories: vilka behov Sola möter för förvaltare, säkerhet och drift, utvecklare och fullstackteam.

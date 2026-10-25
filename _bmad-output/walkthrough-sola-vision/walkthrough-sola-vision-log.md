@@ -35,3 +35,12 @@ Session: session_01HHFkveDN5ahRmaiePiCEQY · Timestamp: 2026-10-25T19:20:00+00:0
 - Result: Block 1 klart. Offentlig sektor borttaget ur design.md. User stories i utkast.
 - Evidence: docs/design.md:180, README.md:5, _bmad-output/walkthrough-sola-vision/user-stories.md
 - Open: User stories ej godkända av användaren.
+
+## 5 — User stories — flyttade till docs
+
+Session: session_01HHFkveDN5ahRmaiePiCEQY · Timestamp: 2026-10-25T19:25:00+00:00
+
+- Action: Flyttade user-stories.md till docs/, länkade från README.md, mergade till main.
+- Result: 12 user stories godkända av användaren som de är.
+- Evidence: docs/user-stories.md, README.md (Läs mer)
+- Open: Block 2–7 ej besökta.

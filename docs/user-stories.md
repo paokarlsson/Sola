@@ -1,6 +1,6 @@
 # User stories: vad Sola löser
 
-Utkast från genomgången av Solas vision. Utgår från möjligheterna i block 1 i [walkthrough-sola-vision.md](walkthrough-sola-vision.md) och målgruppen *system som vill hålla nere förvaltningen*.
+Vilka behov Sola möter, utifrån visionen i [design.md](design.md) och målgruppen *system som vill hålla nere förvaltningen*.
 
 ## Systemägare och förvaltare
 

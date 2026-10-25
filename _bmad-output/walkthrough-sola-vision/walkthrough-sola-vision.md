@@ -2,7 +2,7 @@
 
 Mål för genomgången: granska Solas vision i [docs/design.md](../../docs/design.md) och [README.md](../../README.md), och ta fram user stories som Sola löser.
 
-Aktuellt block: **User stories** (utkast i [user-stories.md](user-stories.md)), därefter 2. Översikt
+Aktuellt block: **2. Översikt** (user stories klara, flyttade till [docs/user-stories.md](../../docs/user-stories.md))
 
 Ram (användarens): bara möjligheter, inga hinder eller problem.
 
