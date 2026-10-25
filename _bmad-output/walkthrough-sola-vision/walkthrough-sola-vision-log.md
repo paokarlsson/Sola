@@ -10,3 +10,11 @@ Session: session_01HHFkveDN5ahRmaiePiCEQY · Timestamp: 2026-10-25T19:03:22+00:0
 - Result: Beslut: fokus på Solas vision (docs/design.md, README.md), inte BMAD-installationen. Användaren vill också ta fram user stories som Sola löser.
 - Evidence: docs/design.md, README.md
 - Open: User stories tas fram i block 4 (problem) och 5 (målgrupper).
+
+## 2 — Block 1 Syfte — användarens ramverk
+
+Session: session_01HHFkveDN5ahRmaiePiCEQY · Timestamp: 2026-10-25T19:10:00+00:00
+
+- Action: Användaren satte en ram för hela genomgången.
+- Result: Beslut: skippa hinder, risker och problem; varje block presenteras enbart som möjligheter. Gäller alla senare block.
+- Open: Block 1 inte markerat klart.
