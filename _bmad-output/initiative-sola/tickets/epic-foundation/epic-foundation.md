@@ -69,3 +69,6 @@ En utvecklare startar exemplet med två kommandon och ser startsidans skal under
 - Decision: 2026-10-26 Pao: `sola dev --port` har 3000 som standard, och `example/server` läser `PORT` med 3001 som standard.
 - Decision: 2026-10-26 Pao: Kontrollen i webbläsaren av CSP-fel, omladdning och CSS-byte är ett manuellt steg för Pao i epikens avslutande verifiering, eftersom DOM-tester ligger utanför initiativet.
 - Decision: 2026-10-26 Pao: Ingen spike. Den första storyn är den mest osäkra: `sola dev` serverar skalet under CSP med rätt hash.
+- Decision: 2026-10-26 Pao: Epiken delas i få stories, tre i ett enda spår 1 → 2 → 3, eftersom alla ändrar `sola dev`. Story 3 väntar på story 2 för att de ändrar samma kod. Ingen avslutande storstädning, eftersom regeln gäller först från fyra stories.
+- Decision: 2026-10-26 Pao: Spårstoryn är story 1, där `sola dev` serverar skalet under strikt CSP. Den stannar vid `sola dev` och går inte genom servern. Proxyn och serverns skelett provas först i story 2.
+- Decision: 2026-10-26 Pao: Pao kontrollerar i webbläsaren både i story 1 och i story 3. Kontrollen i story 3 är epikens avslutande kontroll.

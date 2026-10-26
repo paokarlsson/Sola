@@ -38,5 +38,5 @@ Utförarens schema uppdateras utan omladdning när en brukare bokar i en annan f
 
 ## Notes
 
-- Waits on epic-foundation because: proxyn i sola dev som strömmar SSE
+- Waits on epic-foundation because: proxyn i sola dev som strömmar SSE (1.2); epikens stories får `after = ["1.2"]` när de planeras
 - Waits on epic-provider-flow because: /schedule och de övriga vyerna som ska hämta om

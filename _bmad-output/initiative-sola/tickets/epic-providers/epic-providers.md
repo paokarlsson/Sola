@@ -39,5 +39,5 @@ En besökare som inte är inloggad bläddrar från startsidan till en utförare 
 
 ## Notes
 
-- Waits on epic-foundation because: skalet, proxyn och serverns skelett
+- Waits on epic-foundation because: skalet (1.1), proxyn och serverns skelett (1.2); epikens stories får `after = ["1.2"]` när de planeras
 - Decision: 2026-10-26 Pao (i epic-foundation): `api.js` och serverns datalager i minnet med seed-data skapas här, tillsammans med det första anropet och den första endpoint som läser dem.
