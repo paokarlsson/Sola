@@ -33,6 +33,10 @@ För Pao och AI-agenterna som bygger finns ett ramverk som är bevisat på en ri
 - R11 (exempelapp Byggordning 6; story 8): När en bokning eller tid ändras uppdateras berörda vyer hos andra inloggade användare utan omladdning.
 - R12 (design Huvudidé; exempelapp Vad appen kräver av Sola; story 7, 11): Varje lösning som har skrivits två gånger i appen ligger i `sola/sola.js`, och appen importerar den bara via `#sola`.
 - R13 (story 10; design Utvecklingsverktyg): Alla tester i repot körs med bara Node (`node --test`), utan installation.
+- R14 (story 2; design Användning i en app): En app uppgraderar Sola genom att byta en rad i import map mot en incheckad `vendor/sola-x.y.z.js`, och `git diff` visar exakt vad som ändrats. Exempelappen körs från `vendor/`.
+- R15 (design Distribution): En release av `sola.js` publiceras som en oföränderlig GitHub Release med attestering och kan importeras från jsDelivr. `sola update` hämtar senaste release och verifierar SHA-256.
+- R16 (design Utvecklingsverktyg, Produktion): `sola build` ger en produktionsversion utan bundling: native ES-moduler, import map, `modulepreload`, hashade filnamn och brotli.
+- R17 (story 10; design Utvecklingsverktyg; arkitektur Deferred, Tester för `sola.js`): Exporterna i `sola.js` har `node:test`-tester, och `sola test` kör alla tester med bara Node.
 
 ## Constraints
 
@@ -50,11 +54,13 @@ För Pao och AI-agenterna som bygger finns ett ramverk som är bevisat på en ri
 - Ingen lösning finns två gånger i `example/web/`. Det som delas ligger i `sola/sola.js` och importeras via `#sola`.
 - En sökning hittar inga HTML-sänkor i `sola/` eller `example/`, och webbläsarkonsolen visar inga CSP-fel.
 - Varje epik är sammanslagen till main och körbar med startkommandot i ryggraden.
+- Den första releasen av `sola.js` är publicerad som en oföränderlig GitHub Release. Exempelappen körs från `vendor/`, och `sola build`, `sola test` och `sola update` fungerar mot den.
 
 ## Boundaries
 
 - Utanför (exempelapp Utanför ramen): betalning, notiser via mejl och sms, återkommande tider och flera tidszoner.
-- Utanför (ryggraden, Deferred): första release med distribution, versioner, `vendor/`, `sola build`, `sola update`, `sola test`, `node:test`-tester för `sola.js` och DOM-tester i headless Chrome. Dessutom Spola-integration, driftsättning, SSR, persistens och CI.
+- Utanför: DOM-tester i headless Chrome (design: sist i prioriteringen) och ett npm-paket (design Distribution: valfritt).
+- Utanför (ryggraden, Deferred): Spola-integration, driftsättning, SSR, persistens och CI.
 - Utanför: listan "Idéer att utforska" i design.md.
 - Spola berörs inte. Servern följer kontrakten som Spola senare tar över.
 - Spårvägen genom epikerna: `sola dev` serverar `example/web/` och proxar `/api/*` till `example/server/`. En vy hämtar data via `api.js` och renderar den, och sedan bryts det som upprepas ut till `#sola`.
@@ -70,5 +76,5 @@ För Pao och AI-agenterna som bygger finns ett ramverk som är bevisat på en ri
 
 - Assumption: Listan "Vad appen kräver av Sola" i exempelapp.md är en förväntan och inget krav. Vad som bryts ut avgörs av andra-gången-regeln (AD-4).
 - Assumption: Att en epik levereras till produktion betyder att den är sammanslagen till main och körbar med startkommandot, eftersom driftsättning är uppskjuten i ryggraden.
-- Open question: Hör första release (`sola test`, `sola build`, `sola update`, distribution, `vendor/`, tester för `sola.js`) till det här initiativet eller till ett eget? Förslag: ett eget initiativ, eftersom ryggraden skjuter upp det. Pao avgör.
+- Decision: 2026-10-26 Pao: Första release ingår i initiativet som den sjunde epiken, efter Live.
 - Source conflict: exempelapp Byggordning – steg 1 står två gånger. Den första raden (`example/web/`, `sola dev`, `example/server/`) stämmer med AD-5, och den andra är en kvarleva.

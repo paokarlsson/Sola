@@ -56,3 +56,11 @@ after = [
   { epic = 1, needs = "proxyn i sola dev som strömmar SSE (AD-5)" },
   { epic = 5, needs = "/schedule och övriga vyer som ska hämta om vid händelse" },
 ]
+
+[[epic]]
+id = 7
+slug = "epic-release"
+title = "Första release: tester, sola test, sola build, sola update och distribution"
+description = "Exporterna i sola.js har node:test-tester och sola test kör alla tester; sola build ger en produktionsversion utan bundling; sola.js är släppt som oföränderlig GitHub Release med attestering och nåbar via jsDelivr; sola update hämtar och verifierar en release; exempelappen körs från vendor/sola-x.y.z.js och uppgraderas med en rad i import map."
+covers = ["R14", "R15", "R16", "R17"]
+after = [{ epic = 6, needs = "en färdig app vars utbrytningar har gett sola.js dess API" }]
