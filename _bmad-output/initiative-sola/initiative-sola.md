@@ -80,3 +80,4 @@ För Pao och AI-agenterna som bygger finns ett ramverk som är bevisat på en ri
 - Decision: 2026-10-26 Pao: Guards flyttas från byggsteg 3 till epik 4 (brukarens vyer och `/login?next=`) och epik 5 (rollguarden för utförare). Epik 3 gör in- och utloggning, cookien och 401, eftersom det inte finns någon skyddad vy att prova guards mot förrän i epik 4.
 - Decision: 2026-10-26 Pao: Live (byggsteg 6) förblir en egen epik och slås inte ihop med epik 5.
 - Source conflict: exempelapp Byggordning – steg 1 står två gånger. Den första raden (`example/web/`, `sola dev`, `example/server/`) stämmer med AD-5, och den andra är en kvarleva.
+- Decision: 2026-10-26 Pao: Den andra raden för steg 1 är struken i `docs/exempelapp.md`. Den första raden gäller, i enlighet med AD-5.

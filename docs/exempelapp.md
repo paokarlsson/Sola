@@ -82,7 +82,6 @@ Appen ger konkreta exempel på [user stories](user-stories.md) 6–10 (statiska 
 
 Varje steg byggs i ren HTML/JS/CSS. När samma lösning skrivs för andra gången flyttas den in i Sola.
 1. **Grund:** `example/web/` med `index.html`, `app.js` och `style.css`, `sola dev` för filservering och live reload, och `example/server/` med API och data i minnet.
-1. **Grund:** `index.html`, `app.js`, `style.css` och en devserver med API och data i minnet.
 2. **Utförare och tider:** startsidan och `/providers/:id` – första listorna och första routingen.
 3. **Inloggning:** `/login`, sessionscookie och guards.
 4. **Brukarens flöde:** boka, mina bokningar, avboka – formulär och asynkront state.
