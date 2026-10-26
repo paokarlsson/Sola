@@ -1,0 +1,35 @@
+# Epik grund: tre stories i byggordning. Tabellordning = byggordning.
+# Alla tre ändrar sola dev i tools/ och bildar därför ett enda ordnat spår.
+
+[[entry]]
+id = 1
+type = "story"
+title = "sola dev serverar skalet under strikt CSP"
+description = "Spårstoryn. package.json (type module, imports #sola, engines, inga beroenden), en tom sola/sola.js, skalet i example/web/ (index.html med import map för #sola, app.js med import '#sola', style.css) och sola dev i tools/sola.mjs: serverar roten och --mount-kataloger, svarar med index.html på djuplänkar med Accept: text/html, skickar CSP-headern enligt AD-20 med sha256 av import map-blocket och lyssnar på --port med 3000 som standard. Exporterar en startfunktion som tar port 0. Levererar R2, R5 utan reload-klient, R6 och testerna för sola dev i R7. Story 2 och 3 bygger på startfunktionen, HTML-serveringen och CSP-headern, och epic-providers bygger vyer och app.js på skalet. Pao öppnar skalet och en djuplänk i webbläsaren och kontrollerar att konsolen inte visar CSP-fel. Proxyn hör till story 2 och reload till story 3."
+verify = "node --test är grönt (djuplänk ger index.html, CSP-hashen stämmer, #sola går att importera i Node), och Pao ser skalet på http://localhost:3000 och en djuplänk utan CSP-fel i konsolen."
+covers = ["R2", "R5", "R6", "R7"]
+after = []
+hitl = true
+risk = "high"
+
+[[entry]]
+id = 2
+type = "story"
+title = "Serverns skelett och proxyn för /api/*"
+description = "Med båda startkommandona visas skalet på localhost:3000 (R1). example/server läser PORT med 3001 som standard, exporterar en startfunktion som tar port 0 och svarar på okända /api/* med 404 Problem Details not-found. sola dev får --api och proxar /api/* oförändrat, inklusive Host, cookies och strömmande SSE. Bygger på startfunktionen och testerna för sola dev från story 1. Levererar R1, R3, R8 och serverns tester i R7. Story 3 ändrar samma kod i sola dev efter den här. epic-providers lägger datalagret i minnet i serverns skelett, epic-login bygger på att Host går igenom oförändrad och epic-live på SSE-strömningen."
+verify = "node --test är grönt (Host, Cookie och Set-Cookie oförändrade och en SSE-händelse framme före svarets slut mot en stubbe; serverns 404 not-found), och med båda startkommandona visas skalet på http://localhost:3000 och ger curl http://localhost:3000/api/x 404 application/problem+json."
+covers = ["R1", "R3", "R7", "R8"]
+after = [1]
+hitl = false
+risk = "medium"
+
+[[entry]]
+id = 3
+type = "story"
+title = "Live reload och CSS-byte i sola dev"
+description = "sola dev bevakar roten och varje mount, injicerar en reload-klient som extern modul under /__sola/ i den HTML den serverar och skickar ändringar till den via Server-Sent Events (design Utvecklingsverktyg): en ändrad CSS-fil byts utan omladdning, andra filer laddar om sidan. Ingen fil i example/ känner till /__sola/, och CSP:n från story 1 gäller oförändrad. Levererar R4 och R5 med reload-klienten. Ändrar samma kod i sola dev som story 2. Pao kontrollerar omladdningen av JS, CSS-bytet och att konsolen inte visar CSP-fel, och det är epikens avslutande kontroll i webbläsaren."
+verify = "node --test är grönt (reload-klienten injiceras i index.html och djuplänkar, /__sola/ svarar, CSP-headern oförändrad), och Pao ser i webbläsaren att en ändrad app.js laddar om sidan, att en ändrad style.css byts utan omladdning och att konsolen inte visar några CSP-fel."
+covers = ["R4", "R5"]
+after = [2]
+hitl = true
+risk = "medium"
