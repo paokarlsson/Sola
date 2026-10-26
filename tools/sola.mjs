@@ -23,7 +23,9 @@ const CONTENT_TYPES = {
   '.txt': 'text/plain; charset=utf-8',
 };
 
-const IMPORT_MAP = /<script\s+type="importmap">([\s\S]*?)<\/script>/g;
+// Any `<script>` whose type is importmap (any case, any or no quotes, other
+// attributes allowed); group 2 is the exact inner text up to `</script\s*>`.
+const IMPORT_MAP = /<script(?=[\s>])[^>]*?\stype\s*=\s*(["']?)\s*importmap\s*\1(?=[\s/>])[^>]*>([\s\S]*?)<\/script\s*>/gi;
 
 /**
  * Builds the AD-20 Content-Security-Policy for an HTML body. The hash covers the
@@ -31,7 +33,7 @@ const IMPORT_MAP = /<script\s+type="importmap">([\s\S]*?)<\/script>/g;
  * newline normalisation every HTML parser applies (CRLF and CR become LF).
  */
 function contentSecurityPolicy(html) {
-  const hashes = [...html.matchAll(IMPORT_MAP)].map(([, text]) => {
+  const hashes = [...html.matchAll(IMPORT_MAP)].map(([, , text]) => {
     const parsed = text.replace(/\r\n?/g, '\n');
     return ` 'sha256-${createHash('sha256').update(parsed, 'utf8').digest('base64')}'`;
   });

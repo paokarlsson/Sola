@@ -22,6 +22,20 @@ const INDEX_HTML = [
   '</html>',
   '',
 ].join('\n');
+// Import-map tag variants the browser accepts; `inner` is the literal text the
+// browser hashes, so the expected hash never goes through the server's regex.
+const IMPORT_MAP_FORMS = [
+  { name: 'single-quotes', open: "<script type='importmap'>", close: '</script>' },
+  { name: 'unquoted', open: '<script type=importmap>', close: '</script>' },
+  { name: 'uppercase', open: '<SCRIPT TYPE="IMPORTMAP">', close: '</SCRIPT>' },
+  { name: 'extra-attributes', open: '<script data-x="1" type="importmap" nonce="n">', close: '</script>' },
+  { name: 'whitespace', open: '<script\n  type = "importmap"\n>', close: '</script >' },
+].map((form) => ({ ...form, inner: ` { "imports": { "#${form.name}": "/x.js" } } ` }));
+const NOT_IMPORT_MAPS = [
+  '<script type="module">{ "imports": {} }</script>',
+  '<script data-type="importmap">{ "imports": {} }</script>',
+];
+
 const HTML_ACCEPT = 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8';
 
 // The policy AD-20 requires, with the hash recomputed here from the served body.
@@ -63,6 +77,10 @@ before(async () => {
   await writeFile(join(web, 'style.css'), 'body { margin: 0; }\n');
   await writeFile(join(web, 'plain.html'), '<!doctype html><title>Plain</title>\n');
   await writeFile(join(web, 'crlf.html'), '<!doctype html>\r\n<script type="importmap">{\r\n"imports": {}\r\n}</script>\r\n');
+  for (const { name, open, close, inner } of IMPORT_MAP_FORMS) {
+    await writeFile(join(web, `map-${name}.html`), `<!doctype html>\n${open}${inner}${close}\n`);
+  }
+  await writeFile(join(web, 'not-maps.html'), `<!doctype html>\n${NOT_IMPORT_MAPS.join('\n')}\n`);
   await writeFile(join(web, 'data.bin'), Buffer.from([0, 1, 2]));
   await writeFile(join(web, 'sub', 'index.html'), '<!doctype html><title>Sub</title>\n');
   await symlink(join(fixture, 'secret.txt'), join(web, 'link.txt'));
@@ -135,6 +153,26 @@ describe('startDev', () => {
     assert.equal(
       res.headers.get('content-security-policy'),
       `default-src 'self'; script-src 'self' 'sha256-${hash}'; object-src 'none'; base-uri 'none'`,
+    );
+  });
+
+  for (const { name, inner } of IMPORT_MAP_FORMS) {
+    test(`hashes an import map written as ${name}`, async () => {
+      const res = await fetch(new URL(`/map-${name}.html`, dev.url));
+      assert.equal(res.status, 200);
+      const hash = createHash('sha256').update(inner).digest('base64');
+      assert.equal(
+        res.headers.get('content-security-policy'),
+        `default-src 'self'; script-src 'self' 'sha256-${hash}'; object-src 'none'; base-uri 'none'`,
+      );
+    });
+  }
+
+  test('scripts that are not import maps get no hash', async () => {
+    const res = await fetch(new URL('/not-maps.html', dev.url));
+    assert.equal(
+      res.headers.get('content-security-policy'),
+      "default-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'",
     );
   });
 

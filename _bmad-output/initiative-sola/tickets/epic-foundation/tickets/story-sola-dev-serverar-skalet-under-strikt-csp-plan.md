@@ -3,7 +3,7 @@ title: 'sola dev serverar skalet under strikt CSP'
 type: 'feature'
 ticket: '1'
 created: '2026-10-26'
-status: 'in-review'
+status: 'built'
 baseline_revision: '0eb0d7d6d9dddf9cd06d01766f7c18917958b17b'
 route: 'full'
 route_source: 'auto'
@@ -97,6 +97,13 @@ Greenfield: only `README.md`, `docs/`, `_bmad*` exist. Nothing to reuse; do not 
 
 ## Review Triage Log
 
+### 2026-10-26 — Review pass
+- verdicts: 3 findings — high 0, medium 1, low 2, false 0, maybe-false 0
+- findings:
+  - `[medium]` `[patch]` `tools/sola.mjs` IMPORT_MAP only matched lowercase `<script type="importmap">` with double quotes and no other attributes, so other valid forms got no hash and the browser blocked the import map silently; the test reused the same regex — fixed: regex is case-insensitive and tolerant of quote style, extra attributes and whitespace in both tags; six new tests compute the expected hash from literal inner text (verified failing against the old regex).
+  - `[low]` `[reject]` `--mount /=dir/` is silently shadowed by the root base — real, but mounting on `/` is not an everyday use of `sola dev` and the fix adds a validation branch.
+  - `[low]` `[reject]` absolute-form request targets (`GET http://host/path`) get 400 — real per RFC 9112, but browsers talking directly to the dev server never send it and the fix adds URL-parsing branches.
+
 ## Design Notes
 
 - Import maps take bare specifiers as keys, so `"#sola"` is valid there, and Node resolves the same specifier through `package.json` `imports` — one specifier in both runtimes (AD-3).
@@ -113,3 +120,33 @@ Greenfield: only `README.md`, `docs/`, `_bmad*` exist. Nothing to reuse; do not 
 
 **Manual checks (if no CLI):**
 - Pao opens the shell and a deep link in the browser and sees no CSP errors in the console.
+
+## Auto Run Result
+
+**Summary:** Added the zero-dependency `package.json`, the empty `sola/sola.js`, the three-file shell in `example/web/` and `sola dev` in `tools/sola.mjs`. `sola dev` serves the root and its mounts, answers deep links that accept HTML with `index.html`, sends the AD-20 CSP header hashed from the served import map, and listens on `--port` (default 3000). `startDev({ port: 0 })` is exported for tests and for stories 2 and 3.
+
+**Files changed:**
+- `package.json` -- ESM, `#sola` via `imports`, `engines` node >=24.12, no dependencies.
+- `sola/sola.js` -- empty runtime module.
+- `sola/sola.test.js` -- `#sola` imports in Node.
+- `example/web/index.html` -- the shell, with the import map as its only inline script and root-relative URLs.
+- `example/web/app.js` -- `import '#sola';`.
+- `example/web/style.css` -- base styles.
+- `tools/sola.mjs` -- `startDev` plus a thin, strictly parsed CLI under `import.meta.main`.
+- `tools/sola.test.js` -- 45 tests covering every I/O matrix row, the CSP hash, import-map tag variants and CLI usage errors.
+
+**Review findings:** patches applied: 1 (medium, import-map detection). Deferred: none. Rejected: 2 low (a mount on `/` is shadowed by the root; absolute-form request targets get 400), both because the case is not everyday dev-server use and the fix would add guard branches.
+
+**Follow-up review recommendation:** false. One medium entry was patched (high 0, medium 1, low 0).
+
+**Verification:**
+- `node --test` passes 46 of 46.
+- `curl` on `/providers/1` with `Accept: text/html` returns the shell with the AD-20 header and a real hash; `/sola/sola.js` returns 200.
+- The CLI with `--api` or with no root prints usage and exits 1.
+- The HTML-sink grep finds nothing in `sola` or `example`.
+- Headless Chromium on `/` and `/providers/1` shows the heading, loads `/sola/sola.js` through the import map, and reports no console errors or CSP violations.
+
+**Residual risks:**
+- Only Node 22.22 was available; Node 24.12 is untested.
+- Pao's manual browser check on port 3000 is still outstanding (HITL).
+- Symlinks that point outside the served folders are refused on purpose.
