@@ -77,4 +77,5 @@ För Pao och AI-agenterna som bygger finns ett ramverk som är bevisat på en ri
 - Assumption: Listan "Vad appen kräver av Sola" i exempelapp.md är en förväntan och inget krav. Vad som bryts ut avgörs av andra-gången-regeln (AD-4).
 - Assumption: Att en epik levereras till produktion betyder att den är sammanslagen till main och körbar med startkommandot, eftersom driftsättning är uppskjuten i ryggraden.
 - Decision: 2026-10-26 Pao: Första release ingår i initiativet som den sjunde epiken, efter Live.
+- Decision: 2026-10-26 Pao: Guards flyttas från byggsteg 3 till epik 4 (brukarens vyer och `/login?next=`) och epik 5 (rollguarden för utförare). Epik 3 gör in- och utloggning, cookien och 401, eftersom det inte finns någon skyddad vy att prova guards mot förrän i epik 4.
 - Source conflict: exempelapp Byggordning – steg 1 står två gånger. Den första raden (`example/web/`, `sola dev`, `example/server/`) stämmer med AD-5, och den andra är en kvarleva.
