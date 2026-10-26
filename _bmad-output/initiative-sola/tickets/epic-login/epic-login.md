@@ -41,3 +41,4 @@ En användare loggar in på `/login`, ser sitt namn i sidhuvudet och loggar ut. 
 ## Notes
 
 - Waits on epic-providers because: routern i app.js som /login läggs i
+- Decision: 2026-10-26 Pao (i epic-foundation): Proxyn i `sola dev` skickar `Host` oförändrad, så servern jämför `Origin` mot `Host` på samma sätt i utveckling och i drift (AD-7). Användare med lösenord läggs till i serverns data här.

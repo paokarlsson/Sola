@@ -14,7 +14,7 @@ risk: medium
 
 ## Description
 
-De första vyerna med data och den första routingen (exempelapp Byggordning 2). Vem som helst ser utförare och deras tjänster och lediga tider. Den första `api.js`-funktionen, routetabellen i `app.js` och vymodulens kontrakt kommer här.
+De första vyerna med data och den första routingen (exempelapp Byggordning 2). Vem som helst ser utförare och deras tjänster och lediga tider. `api.js` med sin första funktion, serverns datalager i minnet med seed-data, routetabellen i `app.js` och vymodulens kontrakt kommer här.
 
 ## Outcome
 
@@ -39,4 +39,5 @@ En besökare som inte är inloggad bläddrar från startsidan till en utförare 
 
 ## Notes
 
-- Waits on epic-foundation because: skalet, proxyn och servern med data i minnet
+- Waits on epic-foundation because: skalet, proxyn och serverns skelett
+- Decision: 2026-10-26 Pao (i epic-foundation): `api.js` och serverns datalager i minnet med seed-data skapas här, tillsammans med det första anropet och den första endpoint som läser dem.

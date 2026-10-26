@@ -5,7 +5,7 @@
 id = 1
 slug = "epic-foundation"
 title = "Grund: sola dev, server och appens skal"
-description = "node example/server och sola dev startar exemplet: startsidans skal (index.html med import map för #sola, app.js, api.js, style.css) visas under strikt CSP, djuplänkar svarar med index.html, /api/* proxas till servern med data i minnet inklusive cookies och strömmande SSE, sidan laddas om vid ändring och CSS byts utan omladdning; node --test kör testerna för sola dev och example/server; sola/sola.js finns och nås via #sola. Epik 2 bygger sina vyer på skalet, epik 3 på cookie-proxyn och epik 6 på SSE-proxyn."
+description = "node example/server och sola dev startar exemplet: startsidans skal (index.html med import map för #sola, app.js, style.css) visas under strikt CSP, djuplänkar svarar med index.html, /api/* proxas oförändrat till serverns skelett inklusive Host, cookies och strömmande SSE, sidan laddas om vid ändring och CSS byts utan omladdning; node --test kör testerna för sola dev och example/server; sola/sola.js finns och nås via #sola. Epik 2 bygger sina vyer, api.js och serverns data i minnet på skalet, epik 3 på cookie-proxyn och Host och epik 6 på SSE-proxyn."
 covers = ["R1", "R2", "R3", "R12", "R13"]
 
 [[epic]]
@@ -14,7 +14,7 @@ slug = "epic-providers"
 title = "Utförare och tider: startsidan och /providers/:id"
 description = "Vem som helst ser utförare med tjänster på / och en utförares tjänster och lediga tider på /providers/:id, via api.js och den första routingen i app.js; det som skrivits två gånger är utbrutet till #sola. Epik 3 och 4 bygger vidare på routern och på /providers/:id."
 covers = ["R4", "R12"]
-after = [{ epic = 1, needs = "sola dev med proxy och djuplänkar, example/server med data i minnet, app.js-, api.js- och index.html-skalet med import map för #sola" }]
+after = [{ epic = 1, needs = "sola dev med proxy och djuplänkar, skelettet till example/server, app.js- och index.html-skalet med import map för #sola" }]
 
 [[epic]]
 id = 3
