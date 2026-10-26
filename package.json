@@ -1,0 +1,11 @@
+{
+  "name": "sola",
+  "private": true,
+  "type": "module",
+  "imports": {
+    "#sola": "./sola/sola.js"
+  },
+  "engines": {
+    "node": ">=24.12"
+  }
+}
