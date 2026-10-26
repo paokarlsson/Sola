@@ -32,6 +32,8 @@ En utvecklare hämtar en verifierad `sola.js` från en oföränderlig release, o
 
 - Inget npm-paket och inga DOM-tester i headless Chrome (initiativets Boundaries).
 - Ingen driftsättning av exempelappen.
+- Touch point: GitHub-repot paokarlsson/Sola (publikt, immutable releases påslaget); owner: epic-release, manuellt steg för Pao.
+- Touch point: jsDelivr (`gh/`-import ur det publika repot); owner: epic-release.
 
 ## References
 
@@ -41,3 +43,4 @@ En utvecklare hämtar en verifierad `sola.js` från en oföränderlig release, o
 ## Notes
 
 - Waits on epic-live because: en färdig app vars utbrytningar har gett sola.js dess API
+- Decision: 2026-10-26 Pao: Repot görs publikt före första release. Det, att slå på immutable releases och själva publiceringen, som inte går att ångra, är manuella steg för Pao.
